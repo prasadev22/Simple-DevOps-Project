@@ -1,0 +1,432 @@
+kops create cluster --cloud=aws --zones=us-east-2 --name=demo.k8s.deepcloudusa.com --dns-zone=deepcloudusa.com --dns private 
+
+error populating configuration: Region is not a recognized EC2 region: "us-east-" (check you have specified valid zones?)
+root@ip-172-31-17-11:~/.ssh# kops create cluster --cloud=aws --zones=us-east-2 --name=demo.k8s.deepcloudusa.com --dns-zone=deepcloudusa.com --dns private 
+
+error populating configuration: Region is not a recognized EC2 region: "us-east-" (check you have specified valid zones?)
+root@ip-172-31-17-11:~/.ssh# kops create cluster --cloud=aws --zones=us-east-2 --name=demo.k8s.deepcloudusa.com --dns-zone=deepcloudusa.com --dns private 
+
+error populating configuration: Region is not a recognized EC2 region: "us-east-" (check you have specified valid zones?)
+root@ip-172-31-17-11:~/.ssh# kops create cluster --cloud=aws --zones=us-east-2a --name=demo.k8s.deepcloudusa.com --dns-zone=deepcloudusa.com --dns private 
+I0803 03:04:33.369914    2868 subnets.go:184] Assigned CIDR 172.20.32.0/19 to subnet us-east-2a
+I0803 03:04:33.991646    2868 create_cluster.go:1547] Using SSH public key: /root/.ssh/id_rsa.pub
+Previewing changes that will be made:
+
+I0803 03:04:34.399146    2868 dns.go:95] Private DNS: skipping DNS validation
+I0803 03:04:34.454386    2868 executor.go:103] Tasks: 0 done / 87 total; 42 can run
+I0803 03:04:34.710096    2868 executor.go:103] Tasks: 42 done / 87 total; 25 can run
+I0803 03:04:35.074840    2868 executor.go:103] Tasks: 67 done / 87 total; 18 can run
+I0803 03:04:35.129903    2868 executor.go:103] Tasks: 85 done / 87 total; 2 can run
+I0803 03:04:35.180738    2868 executor.go:103] Tasks: 87 done / 87 total; 0 can run
+Will create resources:
+  AutoscalingGroup/master-us-east-2a.masters.demo.k8s.deepcloudusa.com
+  	Granularity         	1Minute
+  	LaunchConfiguration 	name:master-us-east-2a.masters.demo.k8s.deepcloudusa.com
+  	MaxSize             	1
+  	Metrics             	[GroupDesiredCapacity, GroupInServiceInstances, GroupMaxSize, GroupMinSize, GroupPendingInstances, GroupStandbyInstances, GroupTerminatingInstances, GroupTotalInstances]
+  	MinSize             	1
+  	Subnets             	[name:us-east-2a.demo.k8s.deepcloudusa.com]
+  	SuspendProcesses    	[]
+  	Tags                	{k8s.io/role/master: 1, kops.k8s.io/instancegroup: master-us-east-2a, Name: master-us-east-2a.masters.demo.k8s.deepcloudusa.com, KubernetesCluster: demo.k8s.deepcloudusa.com, kubernetes.io/cluster/demo.k8s.deepcloudusa.com: owned, k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup: master-us-east-2a}
+
+  AutoscalingGroup/nodes.demo.k8s.deepcloudusa.com
+  	Granularity         	1Minute
+  	LaunchConfiguration 	name:nodes.demo.k8s.deepcloudusa.com
+  	MaxSize             	2
+  	Metrics             	[GroupDesiredCapacity, GroupInServiceInstances, GroupMaxSize, GroupMinSize, GroupPendingInstances, GroupStandbyInstances, GroupTerminatingInstances, GroupTotalInstances]
+  	MinSize             	2
+  	Subnets             	[name:us-east-2a.demo.k8s.deepcloudusa.com]
+  	SuspendProcesses    	[]
+  	Tags                	{k8s.io/role/node: 1, kops.k8s.io/instancegroup: nodes, Name: nodes.demo.k8s.deepcloudusa.com, KubernetesCluster: demo.k8s.deepcloudusa.com, kubernetes.io/cluster/demo.k8s.deepcloudusa.com: owned, k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup: nodes}
+
+  DHCPOptions/demo.k8s.deepcloudusa.com
+  	DomainName          	us-east-2.compute.internal
+  	DomainNameServers   	AmazonProvidedDNS
+  	Shared              	false
+  	Tags                	{Name: demo.k8s.deepcloudusa.com, KubernetesCluster: demo.k8s.deepcloudusa.com, kubernetes.io/cluster/demo.k8s.deepcloudusa.com: owned}
+
+  EBSVolume/a.etcd-events.demo.k8s.deepcloudusa.com
+  	AvailabilityZone    	us-east-2a
+  	Encrypted           	false
+  	SizeGB              	20
+  	Tags                	{k8s.io/etcd/events: a/a, k8s.io/role/master: 1, kubernetes.io/cluster/demo.k8s.deepcloudusa.com: owned, Name: a.etcd-events.demo.k8s.deepcloudusa.com, KubernetesCluster: demo.k8s.deepcloudusa.com}
+  	VolumeType          	gp2
+
+  EBSVolume/a.etcd-main.demo.k8s.deepcloudusa.com
+  	AvailabilityZone    	us-east-2a
+  	Encrypted           	false
+  	SizeGB              	20
+  	Tags                	{KubernetesCluster: demo.k8s.deepcloudusa.com, k8s.io/etcd/main: a/a, k8s.io/role/master: 1, kubernetes.io/cluster/demo.k8s.deepcloudusa.com: owned, Name: a.etcd-main.demo.k8s.deepcloudusa.com}
+  	VolumeType          	gp2
+
+  IAMInstanceProfile/masters.demo.k8s.deepcloudusa.com
+  	Shared              	false
+
+  IAMInstanceProfile/nodes.demo.k8s.deepcloudusa.com
+  	Shared              	false
+
+  IAMInstanceProfileRole/masters.demo.k8s.deepcloudusa.com
+  	InstanceProfile     	name:masters.demo.k8s.deepcloudusa.com id:masters.demo.k8s.deepcloudusa.com
+  	Role                	name:masters.demo.k8s.deepcloudusa.com
+
+  IAMInstanceProfileRole/nodes.demo.k8s.deepcloudusa.com
+  	InstanceProfile     	name:nodes.demo.k8s.deepcloudusa.com id:nodes.demo.k8s.deepcloudusa.com
+  	Role                	name:nodes.demo.k8s.deepcloudusa.com
+
+  IAMRole/masters.demo.k8s.deepcloudusa.com
+  	ExportWithID        	masters
+
+  IAMRole/nodes.demo.k8s.deepcloudusa.com
+  	ExportWithID        	nodes
+
+  IAMRolePolicy/master-policyoverride
+  	Role                	name:masters.demo.k8s.deepcloudusa.com
+  	Managed             	true
+
+  IAMRolePolicy/masters.demo.k8s.deepcloudusa.com
+  	Role                	name:masters.demo.k8s.deepcloudusa.com
+  	Managed             	false
+
+  IAMRolePolicy/node-policyoverride
+  	Role                	name:nodes.demo.k8s.deepcloudusa.com
+  	Managed             	true
+
+  IAMRolePolicy/nodes.demo.k8s.deepcloudusa.com
+  	Role                	name:nodes.demo.k8s.deepcloudusa.com
+  	Managed             	false
+
+  InternetGateway/demo.k8s.deepcloudusa.com
+  	VPC                 	name:demo.k8s.deepcloudusa.com
+  	Shared              	false
+  	Tags                	{Name: demo.k8s.deepcloudusa.com, KubernetesCluster: demo.k8s.deepcloudusa.com, kubernetes.io/cluster/demo.k8s.deepcloudusa.com: owned}
+
+  Keypair/apiserver-aggregator
+  	Signer              	name:apiserver-aggregator-ca id:cn=apiserver-aggregator-ca
+  	Subject             	cn=aggregator
+  	Type                	client
+  	LegacyFormat        	false
+
+  Keypair/apiserver-aggregator-ca
+  	Subject             	cn=apiserver-aggregator-ca
+  	Type                	ca
+  	LegacyFormat        	false
+
+  Keypair/apiserver-proxy-client
+  	Signer              	name:ca id:cn=kubernetes
+  	Subject             	cn=apiserver-proxy-client
+  	Type                	client
+  	LegacyFormat        	false
+
+  Keypair/ca
+  	Subject             	cn=kubernetes
+  	Type                	ca
+  	LegacyFormat        	false
+
+  Keypair/etcd-clients-ca
+  	Subject             	cn=etcd-clients-ca
+  	Type                	ca
+  	LegacyFormat        	false
+
+  Keypair/etcd-manager-ca-events
+  	Subject             	cn=etcd-manager-ca-events
+  	Type                	ca
+  	LegacyFormat        	false
+
+  Keypair/etcd-manager-ca-main
+  	Subject             	cn=etcd-manager-ca-main
+  	Type                	ca
+  	LegacyFormat        	false
+
+  Keypair/etcd-peers-ca-events
+  	Subject             	cn=etcd-peers-ca-events
+  	Type                	ca
+  	LegacyFormat        	false
+
+  Keypair/etcd-peers-ca-main
+  	Subject             	cn=etcd-peers-ca-main
+  	Type                	ca
+  	LegacyFormat        	false
+
+  Keypair/kops
+  	Signer              	name:ca id:cn=kubernetes
+  	Subject             	o=system:masters,cn=kops
+  	Type                	client
+  	LegacyFormat        	false
+
+  Keypair/kube-controller-manager
+  	Signer              	name:ca id:cn=kubernetes
+  	Subject             	cn=system:kube-controller-manager
+  	Type                	client
+  	LegacyFormat        	false
+
+  Keypair/kube-proxy
+  	Signer              	name:ca id:cn=kubernetes
+  	Subject             	cn=system:kube-proxy
+  	Type                	client
+  	LegacyFormat        	false
+
+  Keypair/kube-scheduler
+  	Signer              	name:ca id:cn=kubernetes
+  	Subject             	cn=system:kube-scheduler
+  	Type                	client
+  	LegacyFormat        	false
+
+  Keypair/kubecfg
+  	Signer              	name:ca id:cn=kubernetes
+  	Subject             	o=system:masters,cn=kubecfg
+  	Type                	client
+  	LegacyFormat        	false
+
+  Keypair/kubelet
+  	Signer              	name:ca id:cn=kubernetes
+  	Subject             	o=system:nodes,cn=kubelet
+  	Type                	client
+  	LegacyFormat        	false
+
+  Keypair/kubelet-api
+  	Signer              	name:ca id:cn=kubernetes
+  	Subject             	cn=kubelet-api
+  	Type                	client
+  	LegacyFormat        	false
+
+  Keypair/master
+  	AlternateNames      	[100.64.0.1, 127.0.0.1, api.demo.k8s.deepcloudusa.com, api.internal.demo.k8s.deepcloudusa.com, kubernetes, kubernetes.default, kubernetes.default.svc, kubernetes.default.svc.cluster.local]
+  	Signer              	name:ca id:cn=kubernetes
+  	Subject             	cn=kubernetes-master
+  	Type                	server
+  	LegacyFormat        	false
+
+  LaunchConfiguration/master-us-east-2a.masters.demo.k8s.deepcloudusa.com
+  	AssociatePublicIP   	true
+  	IAMInstanceProfile  	name:masters.demo.k8s.deepcloudusa.com id:masters.demo.k8s.deepcloudusa.com
+  	ImageID             	099720109477/ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-20200716
+  	InstanceType        	t3.medium
+  	RootVolumeDeleteOnTermination	true
+  	RootVolumeSize      	64
+  	RootVolumeType      	gp2
+  	SSHKey              	name:kubernetes.demo.k8s.deepcloudusa.com-bd:74:29:86:2c:07:49:00:ce:10:77:3d:ec:98:97:c5 id:kubernetes.demo.k8s.deepcloudusa.com-bd:74:29:86:2c:07:49:00:ce:10:77:3d:ec:98:97:c5
+  	SecurityGroups      	[name:masters.demo.k8s.deepcloudusa.com]
+  	SpotPrice           	
+
+  LaunchConfiguration/nodes.demo.k8s.deepcloudusa.com
+  	AssociatePublicIP   	true
+  	IAMInstanceProfile  	name:nodes.demo.k8s.deepcloudusa.com id:nodes.demo.k8s.deepcloudusa.com
+  	ImageID             	099720109477/ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-20200716
+  	InstanceType        	t3.medium
+  	RootVolumeDeleteOnTermination	true
+  	RootVolumeSize      	128
+  	RootVolumeType      	gp2
+  	SSHKey              	name:kubernetes.demo.k8s.deepcloudusa.com-bd:74:29:86:2c:07:49:00:ce:10:77:3d:ec:98:97:c5 id:kubernetes.demo.k8s.deepcloudusa.com-bd:74:29:86:2c:07:49:00:ce:10:77:3d:ec:98:97:c5
+  	SecurityGroups      	[name:nodes.demo.k8s.deepcloudusa.com]
+  	SpotPrice           	
+
+  ManagedFile/demo.k8s.deepcloudusa.com-addons-bootstrap
+  	Location            	addons/bootstrap-channel.yaml
+
+  ManagedFile/demo.k8s.deepcloudusa.com-addons-core.addons.k8s.io
+  	Location            	addons/core.addons.k8s.io/v1.4.0.yaml
+
+  ManagedFile/demo.k8s.deepcloudusa.com-addons-dns-controller.addons.k8s.io-k8s-1.12
+  	Location            	addons/dns-controller.addons.k8s.io/k8s-1.12.yaml
+
+  ManagedFile/demo.k8s.deepcloudusa.com-addons-dns-controller.addons.k8s.io-k8s-1.6
+  	Location            	addons/dns-controller.addons.k8s.io/k8s-1.6.yaml
+
+  ManagedFile/demo.k8s.deepcloudusa.com-addons-kops-controller.addons.k8s.io-k8s-1.16
+  	Location            	addons/kops-controller.addons.k8s.io/k8s-1.16.yaml
+
+  ManagedFile/demo.k8s.deepcloudusa.com-addons-kube-dns.addons.k8s.io-k8s-1.12
+  	Location            	addons/kube-dns.addons.k8s.io/k8s-1.12.yaml
+
+  ManagedFile/demo.k8s.deepcloudusa.com-addons-kube-dns.addons.k8s.io-k8s-1.6
+  	Location            	addons/kube-dns.addons.k8s.io/k8s-1.6.yaml
+
+  ManagedFile/demo.k8s.deepcloudusa.com-addons-kubelet-api.rbac.addons.k8s.io-k8s-1.9
+  	Location            	addons/kubelet-api.rbac.addons.k8s.io/k8s-1.9.yaml
+
+  ManagedFile/demo.k8s.deepcloudusa.com-addons-limit-range.addons.k8s.io
+  	Location            	addons/limit-range.addons.k8s.io/v1.5.0.yaml
+
+  ManagedFile/demo.k8s.deepcloudusa.com-addons-rbac.addons.k8s.io-k8s-1.8
+  	Location            	addons/rbac.addons.k8s.io/k8s-1.8.yaml
+
+  ManagedFile/demo.k8s.deepcloudusa.com-addons-storage-aws.addons.k8s.io-v1.15.0
+  	Location            	addons/storage-aws.addons.k8s.io/v1.15.0.yaml
+
+  ManagedFile/demo.k8s.deepcloudusa.com-addons-storage-aws.addons.k8s.io-v1.7.0
+  	Location            	addons/storage-aws.addons.k8s.io/v1.7.0.yaml
+
+  ManagedFile/etcd-cluster-spec-events
+  	Base                	s3://demo.k8s.deepcloudusa.com/demo.k8s.deepcloudusa.com/backups/etcd/events
+  	Location            	/control/etcd-cluster-spec
+
+  ManagedFile/etcd-cluster-spec-main
+  	Base                	s3://demo.k8s.deepcloudusa.com/demo.k8s.deepcloudusa.com/backups/etcd/main
+  	Location            	/control/etcd-cluster-spec
+
+  ManagedFile/manifests-etcdmanager-events
+  	Location            	manifests/etcd/events.yaml
+
+  ManagedFile/manifests-etcdmanager-main
+  	Location            	manifests/etcd/main.yaml
+
+  ManagedFile/manifests-static-kube-apiserver-healthcheck
+  	Location            	manifests/static/kube-apiserver-healthcheck.yaml
+
+  Route/0.0.0.0/0
+  	RouteTable          	name:demo.k8s.deepcloudusa.com
+  	CIDR                	0.0.0.0/0
+  	InternetGateway     	name:demo.k8s.deepcloudusa.com
+
+  RouteTable/demo.k8s.deepcloudusa.com
+  	VPC                 	name:demo.k8s.deepcloudusa.com
+  	Shared              	false
+  	Tags                	{kubernetes.io/cluster/demo.k8s.deepcloudusa.com: owned, kubernetes.io/kops/role: public, Name: demo.k8s.deepcloudusa.com, KubernetesCluster: demo.k8s.deepcloudusa.com}
+
+  RouteTableAssociation/us-east-2a.demo.k8s.deepcloudusa.com
+  	RouteTable          	name:demo.k8s.deepcloudusa.com
+  	Subnet              	name:us-east-2a.demo.k8s.deepcloudusa.com
+
+  SSHKey/kubernetes.demo.k8s.deepcloudusa.com-bd:74:29:86:2c:07:49:00:ce:10:77:3d:ec:98:97:c5
+  	KeyFingerprint      	01:30:c4:71:00:1f:6e:09:44:57:43:8d:82:c7:43:e8
+
+  Secret/admin
+
+  Secret/kube
+
+  Secret/kube-proxy
+
+  Secret/kubelet
+
+  Secret/system:controller_manager
+
+  Secret/system:dns
+
+  Secret/system:logging
+
+  Secret/system:monitoring
+
+  Secret/system:scheduler
+
+  SecurityGroup/masters.demo.k8s.deepcloudusa.com
+  	Description         	Security group for masters
+  	VPC                 	name:demo.k8s.deepcloudusa.com
+  	RemoveExtraRules    	[port=22, port=443, port=2380, port=2381, port=4001, port=4002, port=4789, port=179]
+  	Tags                	{Name: masters.demo.k8s.deepcloudusa.com, KubernetesCluster: demo.k8s.deepcloudusa.com, kubernetes.io/cluster/demo.k8s.deepcloudusa.com: owned}
+
+  SecurityGroup/nodes.demo.k8s.deepcloudusa.com
+  	Description         	Security group for nodes
+  	VPC                 	name:demo.k8s.deepcloudusa.com
+  	RemoveExtraRules    	[port=22]
+  	Tags                	{Name: nodes.demo.k8s.deepcloudusa.com, KubernetesCluster: demo.k8s.deepcloudusa.com, kubernetes.io/cluster/demo.k8s.deepcloudusa.com: owned}
+
+  SecurityGroupRule/all-master-to-master
+  	SecurityGroup       	name:masters.demo.k8s.deepcloudusa.com
+  	SourceGroup         	name:masters.demo.k8s.deepcloudusa.com
+
+  SecurityGroupRule/all-master-to-node
+  	SecurityGroup       	name:nodes.demo.k8s.deepcloudusa.com
+  	SourceGroup         	name:masters.demo.k8s.deepcloudusa.com
+
+  SecurityGroupRule/all-node-to-node
+  	SecurityGroup       	name:nodes.demo.k8s.deepcloudusa.com
+  	SourceGroup         	name:nodes.demo.k8s.deepcloudusa.com
+
+  SecurityGroupRule/https-external-to-master-0.0.0.0/0
+  	SecurityGroup       	name:masters.demo.k8s.deepcloudusa.com
+  	CIDR                	0.0.0.0/0
+  	Protocol            	tcp
+  	FromPort            	443
+  	ToPort              	443
+
+  SecurityGroupRule/master-egress
+  	SecurityGroup       	name:masters.demo.k8s.deepcloudusa.com
+  	CIDR                	0.0.0.0/0
+  	Egress              	true
+
+  SecurityGroupRule/node-egress
+  	SecurityGroup       	name:nodes.demo.k8s.deepcloudusa.com
+  	CIDR                	0.0.0.0/0
+  	Egress              	true
+
+  SecurityGroupRule/node-to-master-tcp-1-2379
+  	SecurityGroup       	name:masters.demo.k8s.deepcloudusa.com
+  	Protocol            	tcp
+  	FromPort            	1
+  	ToPort              	2379
+  	SourceGroup         	name:nodes.demo.k8s.deepcloudusa.com
+
+  SecurityGroupRule/node-to-master-tcp-2382-4000
+  	SecurityGroup       	name:masters.demo.k8s.deepcloudusa.com
+  	Protocol            	tcp
+  	FromPort            	2382
+  	ToPort              	4000
+  	SourceGroup         	name:nodes.demo.k8s.deepcloudusa.com
+
+  SecurityGroupRule/node-to-master-tcp-4003-65535
+  	SecurityGroup       	name:masters.demo.k8s.deepcloudusa.com
+  	Protocol            	tcp
+  	FromPort            	4003
+  	ToPort              	65535
+  	SourceGroup         	name:nodes.demo.k8s.deepcloudusa.com
+
+  SecurityGroupRule/node-to-master-udp-1-65535
+  	SecurityGroup       	name:masters.demo.k8s.deepcloudusa.com
+  	Protocol            	udp
+  	FromPort            	1
+  	ToPort              	65535
+  	SourceGroup         	name:nodes.demo.k8s.deepcloudusa.com
+
+  SecurityGroupRule/ssh-external-to-master-0.0.0.0/0
+  	SecurityGroup       	name:masters.demo.k8s.deepcloudusa.com
+  	CIDR                	0.0.0.0/0
+  	Protocol            	tcp
+  	FromPort            	22
+  	ToPort              	22
+
+  SecurityGroupRule/ssh-external-to-node-0.0.0.0/0
+  	SecurityGroup       	name:nodes.demo.k8s.deepcloudusa.com
+  	CIDR                	0.0.0.0/0
+  	Protocol            	tcp
+  	FromPort            	22
+  	ToPort              	22
+
+  Subnet/us-east-2a.demo.k8s.deepcloudusa.com
+  	ShortName           	us-east-2a
+  	VPC                 	name:demo.k8s.deepcloudusa.com
+  	AvailabilityZone    	us-east-2a
+  	CIDR                	172.20.32.0/19
+  	Shared              	false
+  	Tags                	{Name: us-east-2a.demo.k8s.deepcloudusa.com, KubernetesCluster: demo.k8s.deepcloudusa.com, kubernetes.io/cluster/demo.k8s.deepcloudusa.com: owned, SubnetType: Public, kubernetes.io/role/elb: 1}
+
+  VPC/demo.k8s.deepcloudusa.com
+  	CIDR                	172.20.0.0/16
+  	EnableDNSHostnames  	true
+  	EnableDNSSupport    	true
+  	Shared              	false
+  	Tags                	{Name: demo.k8s.deepcloudusa.com, KubernetesCluster: demo.k8s.deepcloudusa.com, kubernetes.io/cluster/demo.k8s.deepcloudusa.com: owned}
+
+  VPCDHCPOptionsAssociation/demo.k8s.deepcloudusa.com
+  	VPC                 	name:demo.k8s.deepcloudusa.com
+  	DHCPOptions         	name:demo.k8s.deepcloudusa.com
+
+Will modify resources:
+  DNSZone/deepcloudusa.com
+  	PrivateVPC          	 <nil> -> name:demo.k8s.deepcloudusa.com
+
+Must specify --yes to apply changes
+
+Cluster configuration has been created.
+
+Suggestions:
+ * list clusters with: kops get cluster
+ * edit this cluster with: kops edit cluster demo.k8s.deepcloudusa.com
+ * edit your node instance group: kops edit ig --name=demo.k8s.deepcloudusa.com nodes
+ * edit your master instance group: kops edit ig --name=demo.k8s.deepcloudusa.com master-us-east-2a
+
+Finally configure your cluster with: kops update cluster --name demo.k8s.deepcloudusa.com --yes
+
+root@ip-172-31-17-11:~/.ssh# kops get cluster
+NAME				CLOUD	ZONES
+demo.k8s.deepcloudusa.com	aws	us-east-2a
+root@ip-172-31-17-11:~/.ssh# edit this cluster with: kops edit cluster demo.k8s.deepcloudusa.com
